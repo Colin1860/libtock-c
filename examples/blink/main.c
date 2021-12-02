@@ -1,19 +1,26 @@
 #include <led.h>
 #include <timer.h>
 
-int main(void) {
+int main(void)
+{
   // Ask the kernel how many LEDs are on this board.
   int num_leds;
   int err = led_count(&num_leds);
-  if (err < 0) return err;
+  if (err < 0)
+    return err;
 
   // Blink the LEDs in a binary count pattern and scale
   // to the number of LEDs on the board.
-  for (int count = 0; ; count++) {
-    for (int i = 0; i < num_leds; i++) {
-      if (count & (1 << i)) {
+  for (int count = 0;; count++)
+  {
+    for (int i = 1; i < num_leds; i++)
+    {
+      if (count & (1 << i))
+      {
         led_on(i);
-      } else {
+      }
+      else
+      {
         led_off(i);
       }
     }
